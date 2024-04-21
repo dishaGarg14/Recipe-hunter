@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="csharp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Hunter</title>
+    <link rel="icon" href="applogo.jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="  background-image: url('bg2.jpeg'); background-size: cover; ">
+    <!-- <body style="  background-image: url('bg.jpg'); background-size: cover; "> -->
+    <header>
+    <div class="container">
+        <div class="logo"></div>
+        <div class="nav">
+            
+            <h1 id="appname" >Recipe Hunter</h1>
+            
+            <div class="searchparent">
+            <div class="search">
+                <input type="text" placeholder="Search here" id="searchspace">
+            </div>
+            <button class="searchicon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="category">
+    <button id="prevbtn">   <i class="fa-solid fa-chevron-left fa-xl"></i>  </button>
+    <div class="dishes">
+        <input type="button" class="dishVal" value="Cake">
+        <input type="button" class="dishVal" value="Paneer"> 
+        <input type="button" class="dishVal" value="Cream">
+    </div>
+    <div class="dishes">
+        <input type="button" class="dishVal" value="Potato">
+        <input type="button" class="dishVal" value="Cookies"> 
+        <input type="button" class="dishVal" value="Pasta">
+    </div>
+    <div class="dishes">
+        <input type="button" class="dishVal" value="Salad">
+        <input type="button" class="dishVal" value="Chocolate"> 
+        <input type="button" class="dishVal" value="Apple">
+    </div>
+    <button id="nextbtn"> <i class="fa-solid fa-chevron-right fa-xl"></i></button>
+ 
+</div>
+
+<div class="outer">
+    <div class="showMeal">
+        
+    </div>
+</div>
+
+<div class="recipe-details" style="display: none;  margin-top:3% ;background-color:#74c32b;">
+    <div id="dish"><h2 id="dishName"></h2></div>
+    <img id="dishImage" src="" alt="Dish Image"  >
+    <h3  style="color:hsl(4, 70%, 43%); " >Ingredients: </h3>
+    <ul id="ingredientsList" style="font-weight: 500; "  ></ul>
+    <h3 style="color:hsl(4, 70%, 43%); " >Instructions: </h3>
+    <p id="instructions"  ></p>
+</div>
+<footer>
+    <style>
+    
+        .stopwatch {
+            margin-top: 100px;
+            height: 100px;
+            width: 300px;
+            background-color: black;
+            border: 5px solid rgb(25, 59, 7);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+        .controls {
+            position: absolute;
+            left: 25px;
+            bottom: 20px;
+            display:flex;
+            gap:30px;
+        }
+         #c1, #c2, #c3 {
+         margin-left: 30px;
+        }
+        .displayTime {
+            color: white;
+            margin-left: 85px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stopwatch" style=" display:none;margin-left:39%;">
+        <h1 id="displayTime" class="displayTime">00:00:00</h1>
+        <div class="controls">
+            <span id="c1"><i id="pauseIcon" class="fa-solid fa-circle-pause" style="color: #FFD43B;" onclick="toggleTimer()"></i></span>
+            <span id="c2"><i id="playIcon" class="fa-solid fa-circle-play fa-2xl" style="color: #c33d04;" onclick="toggleTimer()"></i></span>
+            <span id="c3"><i class="fa-solid fa-redo-alt" style="color: #FFD43B;" onclick="watchReset()"></i></span>
+        </div>
+    </div>
+
+    <script>
+        let [seconds, minutes, hours] = [0, 0, 0];
+        let displayTime = document.getElementById("displayTime");
+        let timer = null;
+        let isRunning = false;
+
+        function stopwatch() {
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes == 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            let h = (hours < 10 ? "0" : "") + hours;
+            let m = (minutes < 10 ? "0" : "") + minutes;
+            let s = (seconds < 10 ? "0" : "") + seconds;
+            displayTime.innerHTML = h + ":" + m + ":" + s;
+        }
+
+        function toggleTimer() {
+            if (isRunning) {
+                clearInterval(timer);
+                document.getElementById("pauseIcon").style.display = "none";
+                document.getElementById("playIcon").style.display = "inline";
+            } else {
+                timer = setInterval(stopwatch, 1000);
+                document.getElementById("playIcon").style.display = "none";
+                document.getElementById("pauseIcon").style.display = "inline";
+            }
+            isRunning = !isRunning;
+            document.getElementById("c1").disabled = isRunning;
+            document.getElementById("c2").disabled = isRunning;
+        }
+
+        function watchReset() {
+            clearInterval(timer);
+            [seconds, minutes, hours] = [0, 0, 0];
+            displayTime.innerHTML = "00:00:00";
+            isRunning = false;
+            document.getElementById("pauseIcon").style.display = "none";
+            document.getElementById("playIcon").style.display = "inline";
+            document.getElementById("c1").disabled = false;
+            document.getElementById("c2").disabled = false;
+        }
+    </script>
+    <div style="display:inline; margin-top:60%;margin-left:27%;"><span style="text-align: center; color:hsl(0deg 93.17% 44.67%);font-size:25px;background-color: #FFD43B;" >"Explore a world of flavor with our diverse range of recipes"</span></div>
+    <div id="btns">
+   <button  id="timerbtn" >Timer</button>
+   <button id="unitConverterBtn" onclick="toggleUnitConverter()">Unit Converter</button> 
+   <button id="groceryListBtn" onclick="toggleGroceryListPopup()">Grocery List</button> 
+   <br>
+</div>
+         <div class="unit-converter" style="display: none;">
+            <div class="container">
+                <h2>Unit Converter</h2>
+                <div>
+                    <input type="number" id="inputValue" placeholder="Enter value">
+                    <select id="selectUnit">
+                        <option value="lbs">Pounds (lbs)</option>
+                        <option value="g">Grams (g)</option>
+                        <option value="kg">Kilograms (kg)</option>
+                    </select>
+                </div>
+                <div>
+                    <button onclick="convert()">Convert</button>
+                </div>
+                <div>
+                    <h3>Converted Value:</h3>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+    
+
+
+<div class="popup-container" id="popupContainer" style="display: none;">
+    <div class="popup">
+        <span class="close-btn" onclick="toggleGroceryListPopup()">&times;</span>
+        <div class="container">
+            <!-- Existing grocery list HTML goes here -->
+            <span class="parent">
+                <span style="margin-left:35%">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16" id="pencil">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                    </svg>
+                </span>
+                <h2 style="margin-right:30px;">Grocery List</h2>
+            </span>
+            <div class="search">
+                <input type="text" placeholder="Add items" class="search1">
+                <button class="search2">Add</button>
+                <button class="reset-button" onclick="resetGroceryList()">Reset</button> <!-- Move the reset button here -->
+                <div class="list-container">
+                    <ul id="list_container">
+                        <!-- List items will be dynamically added here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script>
+           
+            // Function to toggle the display of the unit converter
+            function toggleUnitConverter() {
+                const unitConverter = document.querySelector('.unit-converter');
+                unitConverter.style.display = unitConverter.style.display === 'none' ? 'block' : 'none';
+            }
+
+            function convert() {
+                var inputValue = parseFloat(document.getElementById('inputValue').value);
+                var selectUnit = document.getElementById('selectUnit').value;
+                var result = document.getElementById('result');
+
+                if (selectUnit === 'lbs') {
+                    var grams = inputValue * 453.592;
+                    var kilograms = grams / 1000;
+                    result.innerHTML = `${inputValue} pounds is equal to ${grams.toFixed(2)} grams or ${kilograms.toFixed(2)} kilograms.`;
+                } else if (selectUnit === 'g') {
+                    var pounds = inputValue / 453.592;
+                    var kilograms = inputValue / 1000;
+                    result.innerHTML = `${inputValue} grams is equal to ${pounds.toFixed(2)} pounds or ${kilograms.toFixed(2)} kilograms.`;
+                } else if (selectUnit === 'kg') {
+                    var grams = inputValue * 1000;
+                    var pounds = grams / 453.592;
+                    result.innerHTML = `${inputValue} kilograms is equal to ${grams.toFixed(2)} grams or ${pounds.toFixed(2)} pounds.`;
+                }
+            }
+       
+        </script>
+ 
+
+</footer>
+<script src="script.js"></script>
+</body>
+</html> 
+ 
+  

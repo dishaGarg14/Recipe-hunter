@@ -1,0 +1,228 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:cursive;
+}
+body,html{
+    width:100%;
+    height:100%;
+   /* background-color: #a1ce30; */
+   position:relative;
+    
+}
+
+#appname{
+    /* margin-bottom:40px;
+    margin-left:60px; */
+    margin-top: 100px;
+    /* margin-bottom:20px; */
+    margin-left:60px;
+   
+}
+.searchparent{
+    display:flex;
+}
+.container{
+    
+    display:flex;
+    justify-content: center;
+    width:100%;
+    height:200px;
+    /* background-color:#FFF67E; */
+    background-color: #69b809;
+  position: relative;
+}
+
+
+.outer{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#searchspace{
+    height:40px;
+    width:300px;
+    border:2px solid black;
+    border-radius:20px;
+    padding-left:40px;
+   
+}
+#searchspace:active{
+   color:#105c07;
+}
+.logo{
+    height:90px;
+    width:90px;
+    background-image: url(applogo.jpeg);
+    background-size: cover;
+    position:absolute;
+    left:47%;
+}
+.searchicon{
+    height:43px;
+    width:70px;
+    color:white;
+    background-color: orangered;
+    border-radius:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:-60px;
+    border:2px solid black;
+    border-left: none;
+}
+.category{
+    margin-left:35%;
+   
+    width:40%;
+    height:200px;
+    display:flex;
+    justify-content: center;
+    overflow: hidden;
+    margin:auto;
+   
+    position:relative;
+}
+
+ .dishes{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    width:100%;
+    height:100%;
+  
+    position:absolute;
+}
+.dishVal{
+    height:40px;
+    width:100px;
+    border:2px solid black;
+   border-radius: 20px;
+   color:white;
+   background-color:#105c07;
+}
+#prevbtn{
+    height:50px;
+    width:50px;
+    position:absolute;
+    top:40%;
+    left:2px;
+  
+    /* background-color: #a1ce30; */
+    border: none;
+}
+#nextbtn{
+    height:50px;
+    width:50px;
+    position:absolute;
+    top:40%;
+    right:2px;
+    /* background-color: #a1ce30; */
+    
+    border: none;
+}
+.dishes input:hover{
+   color:black;
+   background-color: rgb(217,215,215);
+   cursor: pointer;
+}
+.showMeal{
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+
+}
+.showMeal .card{
+    width:300px;
+    height:400px;
+    background-color: white;
+    text-align: center;
+    margin-inline:20px;
+    margin-top:22px;
+    box-shadow:1px 3px 3px 3px rgb(213,212,212);
+    border-radius: 4px;
+}
+.card img{
+    width:100%;
+    border-radius: 4px;                                                              
+}
+.card p{
+    margin-top:11px;
+}
+.card button{
+    width:90px;
+    height:30px;
+    background-color:orangered;
+    color:white;
+    margin-top:11px;
+    border:none;
+}
+@media (max-width:370px){
+    .category input{
+        width:60px;
+        font-size:14px;
+    }
+    #nextBtn{
+        left:76%;
+    }
+    #searchspace{
+        height:40px;
+        width:200px;
+        border:2px solid black;
+        border-radius:20px;
+        padding-left:20px;
+        
+    }
+    #dishImage{
+        height:80px;
+        width:80px;
+        margin-left:43%;
+    }
+}
+#dishImage{
+    height:300px;
+    width:300px;
+    border:5px solid black;
+}
+#btns {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 42%;
+    display: flex;
+    align-items: center; /* Add this line */
+}
+
+.popup-container {
+    background-color: rgb(246, 246, 0); /* Change background color */
+    padding: 20px;
+    /* border-radius: 10px; */
+}
+
+#timerbtn,#groceryListBtn,#unitConverterBtn {
+    margin-right: 20px;
+    margin-bottom:20px;
+    /* border-radius: 50%; */
+    height: 70px;
+    width: 70px;
+    border: 4px solid black;
+    background-color:  #69b809; /* Change background color */
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-container {
+    margin-bottom: 10px; /* Add margin to separate from the grocery list */
+}
+
+.list-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+}
+.search .reset-button {
+    margin-left: 10px; /* Adjust margin to create space between the add and reset buttons */
+}
